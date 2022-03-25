@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Collapsible Sidebar</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link rel="stylesheet" href="main.css" />
+    </head>
+    <body>
+        <div class="page-container">
+            <nav class="nav">
+                <div class="nav__border"></div>
+                <a href="#" class="nav__link">
+                    <div class="nav__icon-container">
+                        <i class="material-icons">dashboard</i>
+                    </div>
+                    <span class="nav__label">Dashboard</span>
+                </a>
+                <a href="#" class="nav__link">
+                    <div class="nav__icon-container">
+                        <i class="material-icons">alarm</i>
+                    </div>
+                    <span class="nav__label">Alerts</span>
+                </a>
+                <a href="#" class="nav__link">
+                    <div class="nav__icon-container">
+                        <i class="material-icons">extension</i>
+                    </div>
+                    <span class="nav__label">Plugins</span>
+                </a>
+                <a href="#" class="nav__link">
+                    <div class="nav__icon-container">
+                        <i class="material-icons">power_settings_new</i>
+                    </div>
+                    <span class="nav__label">Log Out</span>
+                </a>
+            </nav>
+            <main class="main"></main>
+        </div>
+        <script>
+            // Navigation
+            {
+                const collapsedClass = "nav--collapsed";
+                const hiddenClass = "hidden";
+                const lsKey = "navCollapsed";
+
+                const nav = document.querySelector(".nav");
+                const navLabels = document.querySelectorAll(".nav__label");
+                const navBorder = document.querySelector(".nav__border");
+
+                if (localStorage.getItem(lsKey) === "true") {
+                    nav.classList.add(collapsedClass);
+                    navLabels.forEach((navLabel) => {
+                        navLabel.classList.toggle(hiddenClass);
+                    });
+
+                }
+
+                navBorder.addEventListener("click", () => {
+                    nav.classList.toggle(collapsedClass);
+                    setTimeout(() => {
+                        navLabels.forEach((navLabel) => {
+                            navLabel.classList.toggle(hiddenClass);
+                        });
+                    }, 50);
+                    localStorage.setItem(lsKey, nav.classList.contains(collapsedClass));
+                });
+            }
+        </script>
+    </body>
+</html>
